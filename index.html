@@ -3,7 +3,8 @@
 
 <script>
 
-var name = Document.referrer;
+//var name = Document.referrer;
+var name = window.parent.location;
 
 async function myFetch(index_location) {
   let response = await fetch(index_location);
