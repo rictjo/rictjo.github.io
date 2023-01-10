@@ -1,5 +1,56 @@
-<html>
-<head><title></title></head>
+<htlm>
+<head><title></title>
+
+<script>
+
+var name = Document.referrer;
+
+async function myFetch(index_location) {
+  let response = await fetch(index_location);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  let text = await response.text(); // await ensures variable has fulfilled Promise
+  return( text );
+}
+
+function myFunction(name_token){
+    let newUrl = name_token.split("?")[1];
+    return(newUrl);  
+}
+
+function myGistLocation(){
+    let newUrl = name.split("?")[1].split("/raw")[0];
+    alert(newUrl);
+    return(newUrl);
+}
+
+function fun() {
+    let newUrl = myFunction(name);
+    return(newUrl);  
+}
+
+window.onload = async function() {
+        alert( myFunction(name) + '.js' )
+        var html = myFunction(name) + '.js';
+        var text = await myFetch(myFunction(name));
+        var iframe = document.createElement('iframe');
+        iframe.width  = '100%'
+        iframe.height = '90%'
+        iframe.onload = function() {
+            var oDoc = iframe.contentWindow.document;
+            oDoc.open();
+            oDoc.write( text );
+            oDoc.close();
+        };
+        document.body.appendChild(iframe);
+};
+
+</script>
+</head>
 <body>
+
+<input type = "button" value = "Goto Gist" onClick = "window.location.href=myGistLocation();" />
+
 </body>
 </html>
